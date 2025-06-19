@@ -1,5 +1,13 @@
 package SimRabbit;
 
+/**
+ * 
+ * @author Largeron Jean-Baptiste and Elnasory Karam
+ * 
+ * @description 
+ * The Time class is used to implement the notion of time in the simulation
+ */
+
 public class Time {
 
     private int time ; // months passed

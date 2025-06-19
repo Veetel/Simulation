@@ -1,7 +1,15 @@
 package SimRabbit;
 
+/**
+ * 
+ * @author Largeron Jean-Baptiste and Elnasory Karam
+ * 
+ * @description 
+ * The Cezeau class is meant to be a world that hostes the simulation having the notion of time 
+ */
+
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.LinkedList;
 
 public class Cezeaux
 {
@@ -17,14 +25,14 @@ public class Cezeaux
 
     // Space 
 
-    private ArrayList<Rabbit> MaleRabbits; // TODO : Change to linked list for a better efficiency 
-    private ArrayList<Rabbit> FemaleRabbits ;
+    private LinkedList<Rabbit> MaleRabbits ; 
+    private LinkedList<Rabbit> FemaleRabbits ;
 
     private int foodCount ; 
 
     // Random generator
 
-    private final Random random ;
+    private final MTRandom random ;
 
     /*-------------------------------- Constructor ---------------------------------- */
 
@@ -32,15 +40,15 @@ public class Cezeaux
      * @description default constructor
      * @return   initialize a instance
      */
-    public Cezeaux(Random random)
+    public Cezeaux(MTRandom random)
     {
         this.numberBirth = 0 ;
         this.numberDead = 0 ;
 
         this.time = new Time() ;
 
-        this.MaleRabbits = new ArrayList<Rabbit>();
-        this.FemaleRabbits = new ArrayList<Rabbit>();
+        this.MaleRabbits = new LinkedList<Rabbit>();
+        this.FemaleRabbits = new LinkedList<Rabbit>();
 
         this.foodCount = 0 ;
 
@@ -54,7 +62,7 @@ public class Cezeaux
             this.MaleRabbits.add(newRabbit);
         }
     }
-  
+
     /**
      * @description          The method initialize an instance of Cezeaux from a list of rabbits
      * @param  listOfRabbits is a list of rabbits instances. 
@@ -62,10 +70,10 @@ public class Cezeaux
      */
     public Cezeaux(ArrayList<Rabbit> listOfRabbits)
     {
-        this.random = new Random();
+        this.random = new MTRandom();
 
-        this.MaleRabbits = new ArrayList<Rabbit>();
-        this.FemaleRabbits = new ArrayList<Rabbit>();
+        this.MaleRabbits = new LinkedList<Rabbit>();
+        this.FemaleRabbits = new LinkedList<Rabbit>();
 
         this.foodCount = 0 ;
 
@@ -232,6 +240,18 @@ public class Cezeaux
         if (this.foodCount() < (this.FemaleRabbits.size() + this.MaleRabbits.size()))
         {
             // Determine how many rabbits to kill
+            int numToKill = this.FemaleRabbits.size() + this.MaleRabbits.size() ;
+
+            // Randomly chose rabbits to kill because of famine
+            for ( int i = 0 ; i < numToKill ; i +=2 )
+            {
+                // Choose a random rabbit to kill
+                int choice = (int) ( this.random.nextInt(0, 1) * (this.FemaleRabbits.size()) )  ;
+                this.FemaleRabbits.get(choice).kill(); ;
+
+                choice = (int) ( this.random.nextInt(0, 1) * (this.MaleRabbits.size()) )  ;
+                this.MaleRabbits.get(choice).kill() ;
+            }
 
         } 
         else 
@@ -240,13 +260,11 @@ public class Cezeaux
             this.foodCount -= this.FemaleRabbits.size() + this.MaleRabbits.size() ;
         }
 
-        // Randomly chose rabbits to kill because of famine
-        // TODO 
-
         // update the statistics about alive rabbits
         this.numberAlive = this.FemaleRabbits.size() + this.MaleRabbits.size() ;
 
         // readd some food for the next iteration 
+        this.foodCount = (int) (( this.MaleRabbits.size() + this.FemaleRabbits.size() ) * 0.9) + this.random.nextInt() ;
     }
 
     /**
@@ -263,7 +281,7 @@ public class Cezeaux
     
     public static void main (String[] args)
     {   
-        Random random = new Random();
+        MTRandom random = new MTRandom();
 
         Cezeaux world = new Cezeaux(random);
 

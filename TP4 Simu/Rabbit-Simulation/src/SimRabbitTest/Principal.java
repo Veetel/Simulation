@@ -28,7 +28,6 @@ public class Principal {
 
     /**
      * 
-
      * @description : Calculate the estimate without bias needed for the   
      *                confidence interval                                      
      * @param list a list of integer

@@ -1,10 +1,17 @@
 package SimRabbit;
 
+/**
+ * 
+ * @author Largeron Jean-Baptiste and Elnasory Karam
+ * 
+ * @description 
+ * The Coordonates class manages the coordonates of the rabbits on the girde, the implementation of such a girde is optional  
+ */
+
 public class Coordonates {
     private final int x_axes;
     private final int y_axes;
 
-    //TODO : implement a space limit notion and move function
 
     /*--------------------------- getters ----------------------------------------- */  
 

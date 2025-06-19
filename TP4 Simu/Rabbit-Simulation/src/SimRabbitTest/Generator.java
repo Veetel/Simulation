@@ -84,11 +84,13 @@ public class Generator {
         if(this.age == 15){
             this.age = -1;
         }
+
+        
         if(this.age >=10*12){
-            this.mortality += 10;
+            this.mortality += 1-Math.pow(0.10,(1.0/12.0))  ;//see attributes to know how i did this
         }
         else if(rabbit.getMaturity() == 1){
-            this.mortality = 4.56;//see attributes to know how i did this
+            this.mortality = 1-Math.pow(0.4,(1.0/12.0));//see attributes to know how i did this
         }
     }
 

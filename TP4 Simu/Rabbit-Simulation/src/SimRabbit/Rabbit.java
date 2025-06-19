@@ -1,7 +1,14 @@
 package SimRabbit;
 
-import java.util.ArrayList;
-import java.util.Random; 
+/**
+ * 
+ * @author Largeron Jean-Baptiste and Elnasory Karam
+ * 
+ * @description 
+ * The Time class is used to define the behavior of the rabbit being
+ */
+
+import java.util.LinkedList;
 
 enum Sex 
 {
@@ -22,7 +29,7 @@ public class Rabbit
 
     private int morbidity ;
 
-    private final Random random ;
+    private final MTRandom random ;
 
     private boolean mature ;
 
@@ -39,7 +46,7 @@ public class Rabbit
      * 
      */
 
-    public Rabbit(Coordonates inCoordonatesOfBirth, int inInstantOfBirth, Random random )
+    public Rabbit(Coordonates inCoordonatesOfBirth, int inInstantOfBirth, MTRandom random )
     {
         this.age = 0 ;
         this.mature = false ;
@@ -190,7 +197,7 @@ public class Rabbit
      * @param ArrayList<Rabbit> rabbits, the rabbit list to look for a partener in 
      * @return the index of the rabbit or -1 if not found
      */
-    public int lookForPartener (ArrayList<Rabbit> rabbits)
+    public int lookForPartener (LinkedList<Rabbit> rabbits)
     {
         // Look for a mate
         for (int i = 0; i < rabbits.size(); i++)
